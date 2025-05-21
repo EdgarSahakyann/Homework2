@@ -67,7 +67,7 @@ void get_data(std::vector<int> adj[], std::vector<std::vector<int>>& adjacency_m
     input_file.close();
 }
 
-void APU_til(std::vector<int> adj[], int u,
+void AP_util(std::vector<int> adj[], int u,
     std::vector<bool>& visited, std::vector<int>& disc,
     std::vector<int>& low, int& time, int parent,
     std::vector<bool>& isAP) {
@@ -79,7 +79,7 @@ void APU_til(std::vector<int> adj[], int u,
     for (int v : adj[u]) {
         if (!visited[v]) {
             children++;
-            APU_til(adj, v, visited, disc, low, time, u, isAP);
+            AP_util(adj, v, visited, disc, low, time, u, isAP);
 
             low[u] = std::min(low[u], low[v]);
 
@@ -106,7 +106,7 @@ void find(std::vector<int> adj[], int V) {
 
     for (int u = 0; u < V; ++u) {
         if (!visited[u]) {
-            APU_til(adj, u, visited, disc, low, time, -1, isAP);
+            AP_util(adj, u, visited, disc, low, time, -1, isAP);
         }
     }
 
